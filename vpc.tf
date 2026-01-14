@@ -1,0 +1,13 @@
+# VPC Network
+resource "google_compute_network" "vpc" {
+  name                    = "gke-vpc"
+  auto_create_subnetworks = false
+}
+
+# Subnet
+resource "google_compute_subnetwork" "subnet" {
+  name          = "gke-subnet"
+  ip_cidr_range = "10.10.0.0/16"
+  region        = "asia-south1"
+  network       = google_compute_network.vpc.id
+}
